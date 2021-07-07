@@ -26,6 +26,10 @@ let canMoveTo (color : Color) (board : Board) (pos : Position) : bool =
         | Ally -> false
         | _ -> true
 
+/// <summary>
+/// returns all possible moves a piece can make naturally, regardless of board state
+/// </summary>
+/// <param name="piece"></param>
 let generateAllMoves (piece : Piece) : seq<Position> =
     match piece.PieceType with
         | King  ->
@@ -40,10 +44,16 @@ let generateAllMoves (piece : Piece) : seq<Position> =
         | Bishop -> Seq.empty
         | Pawn -> Seq.empty
 
+/// <summary>
+/// returns all possible moves a piece can make in a particular board state
+/// </summary>
+/// <param name="piece"></param>
+/// <param name="board"></param>
 let generateMoves (piece: Piece) (board : Board) : seq<Position> =
     generateAllMoves piece
     |> Seq.filter isWithinBoard'
     |> Seq.filter (canMoveTo piece.Color board)
+    // add more filters here such as checks and checkmates
 
 let movePiece (piece : Piece) (pos : Position) (board : Board) : (Piece * Board) =
     board.[piece.Position.X, piece.Position.Y] <- None

@@ -1,9 +1,9 @@
 ﻿module Models
 
-type Position = { x : int; y : int }
+type Position = { X : int; Y : int }
 type Color = Black | White
 type Occupied = Empty | Ally | Enemy
-type PieceType = 
+type PieceType =
     | King
     | Queen
     | Rook
@@ -11,5 +11,5 @@ type PieceType =
     | Bishop
     | Pawn
 
-type Piece = {pieceType : PieceType; color : Color; position : Position}
+type Piece = {PieceType : PieceType; Color : Color; Position : Position}
 type Board = Option<Piece> [,]
